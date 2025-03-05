@@ -1,0 +1,4 @@
+<li id="<%= dom_id(review) %>">
+  <%= review.content %> - Note: <%= review.rating %>
+  <%= link_to 'Supprimer', restaurant_review_path(@restaurant, review), method: :delete, data: { turbo_method: :delete } %>
+</li>

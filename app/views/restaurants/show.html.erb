@@ -1,0 +1,23 @@
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.category %></p>
+
+<h2>Ajouter un avis :</h2>
+<%= render 'reviews/form', restaurant: @restaurant %>
+
+<h2>Avis</h2>
+<ul>
+  <% @restaurant.reviews.each do |review| %>
+    <% if review.present? %>
+      <li id="<%= dom_id(review) %>">
+        <%= review.content %> - Note: <%= review.rating %>
+        <%= link_to 'Supprimer', restaurant_review_path(@restaurant, review), method: :delete, data: { turbo_method: :delete } %>
+      </li>
+    <% else %>
+      <p>Aucun avis disponible.</p>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= turbo_stream_from @restaurant %>
+<%= link_to 'Retour à la liste des restaurants', restaurants_path %>

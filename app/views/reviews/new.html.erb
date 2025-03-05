@@ -1,0 +1,28 @@
+<h1>Ajouter un avis pour <%= @restaurant.name %></h1>
+
+<%= form_with(model: [@restaurant, @review], local: true) do |form| %>
+  <% if @review.errors.any? %>
+    <div class="errors">
+      <h2>Il y a des erreurs :</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :rating, "Note (1-5)" %>
+    <%= form.number_field :rating, in: 1..5 %>
+  </div>
+
+  <div>
+    <%= form.label :content, "Votre avis" %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit "Envoyer l'avis" %>
+  </div>
+<% end %>
